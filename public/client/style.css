@@ -1,0 +1,215 @@
+/* ====== Reset & Base ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f0f4f8, #ffffff);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ====== Header ====== */
+header {
+    background: linear-gradient(to right, #0066cc, #004080);
+    color: #fff;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+    font-size: 1.7rem;
+}
+
+.admin-login {
+    background-color: #ffffff33;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.admin-login:hover {
+    background-color: #ffffff55;
+}
+
+/* ====== Layout ====== */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+    gap: 24px;
+    justify-content: center;
+}
+
+/* ====== Left Panel ====== */
+.left-panel {
+    flex: 1 1 40%;
+    background-color: #ffffff;
+    padding: 25px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease-in-out;
+}
+
+.left-panel:hover {
+    transform: translateY(-3px);
+}
+
+.left-panel h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: #004080;
+    border-bottom: 2px solid #0077cc33;
+    padding-bottom: 8px;
+}
+
+.left-panel ul {
+    list-style: none;
+}
+
+.left-panel li {
+    background-color: #eaf6ff;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-left: 4px solid #0077cc;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.left-panel li:hover {
+    background-color: #d2edff;
+}
+
+/* ====== Right Panel (Form) ====== */
+.right-panel {
+    flex: 1 1 50%;
+    background-color: #ffffff;
+    padding: 25px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.right-panel h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: #004080;
+    border-bottom: 2px solid #0077cc33;
+    padding-bottom: 8px;
+}
+
+/* ====== Form Groups ====== */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #0077cc;
+    box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.2);
+}
+
+.form-group select {
+    background-color: #fefefe;
+}
+
+/* ====== Buttons ====== */
+button {
+    background: linear-gradient(to right, #0077cc, #005fa3);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(to right, #005fa3, #004080);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* ====== Camera Preview Styles ====== */
+#video,
+#canvas {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    background: #000;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    display: block;
+}
+
+#canvas {
+    display: none;
+}
+
+/* ====== Animation ====== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== Mobile Responsiveness ====== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        flex: 1 1 100%;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+    }
+
+    .admin-login {
+        align-self: flex-end;
+    }
+}

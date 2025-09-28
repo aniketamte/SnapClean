@@ -1,0 +1,277 @@
+:root {
+    --color-bg: #f4f7fc;
+    --color-sidebar: #ffffff;
+    --color-primary: #2596be;
+    --color-secondary: #a0c1d1;
+    --color-text: #2e3a59;
+    --color-success: #2ecc71;
+    --color-warning: #f1c40f;
+    --color-danger: #e74c3c;
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hard: 0 6px 18px rgba(0, 0, 0, 0.12);
+    --border-radius: 14px;
+
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-main);
+    background: linear-gradient(130deg, #edf1f7, #f9fbfc);
+    color: var(--color-text);
+}
+
+/* Layout */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background: var(--color-sidebar);
+    border-right: 1px solid #eceff6;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    background: var(--color-primary);
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.tab-btn {
+    flex: 1;
+    margin: 0 4px;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    background: #ffffff30;
+    border-bottom: 2px solid #fff;
+}
+
+/* Complaint List */
+.complaint-list {
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.complaint-item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 12px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.complaint-item:hover,
+.complaint-item.active {
+    background: #e8f8ff;
+    box-shadow: 0 3px 10px rgba(30, 144, 255, 0.15);
+    transform: translateX(2px);
+}
+
+.risk-icon {
+    margin-right: 12px;
+    font-size: 1.2rem;
+}
+
+.risk-1 {
+    color: var(--color-success);
+}
+
+.risk-2 {
+    color: var(--color-warning);
+}
+
+.risk-3 {
+    color: var(--color-danger);
+}
+
+.complaint-details .complaint-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #2e3a59;
+}
+
+.complaint-meta {
+    font-size: 0.9rem;
+    color: #586983;
+    margin-top: 4px;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Dashboard Summary */
+.dashboard-summary {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.status-card {
+    flex: 1 1 30%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(14px);
+    padding: 20px;
+    box-shadow: var(--shadow-soft);
+    transition: 0.3s;
+}
+
+.status-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hard);
+}
+
+.status-card .card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-card .card-count {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.status-card.pending .card-count {
+    color: var(--color-warning);
+}
+
+.status-card.inprogress .card-count {
+    color: #2980b9;
+}
+
+.status-card.completed .card-count {
+    color: var(--color-success);
+}
+
+/* Map Section */
+.map-section {
+    height: 100%;
+    width: 100%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+}
+
+#india-map {
+    width: 100%;
+    height: 60vh;
+    border-radius: var(--border-radius);
+}
+
+/* Scroll Styles */
+.complaint-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.complaint-list::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+/* Media Breakpoints */
+@media (max-width: 1024px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        box-shadow: none;
+    }
+
+    .tabs {
+        flex: 1;
+        justify-content: space-around;
+    }
+
+    .complaint-list {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        overflow-x: scroll;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .complaint-item {
+        flex: 0 0 auto;
+        width: 240px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-summary {
+        flex-direction: column;
+    }
+
+    .status-card {
+        flex: 1 1 100%;
+    }
+
+    #india-map {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-btn {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+
+    .status-card .card-title {
+        font-size: 0.95rem;
+    }
+
+    .status-card .card-count {
+        font-size: 1.6rem;
+    }
+}
