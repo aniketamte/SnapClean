@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000"; // change if deployed
+const API_URL = "https://snapclean.onrender.com";
 
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
