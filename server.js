@@ -6,6 +6,8 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const axios = require("axios");
+const FormData = require("form-data");
 
 const Complaint = require("./models/complaint");
 
@@ -49,9 +51,11 @@ app.post("/api/complaints", upload.single("photo"), async (req, res) => {
   try {
     const { title, description, lat, lon, risk, group } = req.body;
     let photoPath = null;
+    let photoPathFs = null;
 
     if (req.file) {
       photoPath = `/uploads/${req.file.filename}`;
+      photoPathFs = path.join(uploadsDir, req.file.filename);
     } else if (req.body.photoBase64) {
       const matches = req.body.photoBase64.match(
         /^data:(image\/\w+);base64,(.+)$/
@@ -62,13 +66,57 @@ app.post("/api/complaints", upload.single("photo"), async (req, res) => {
         const filename = `${Date.now()}-${Math.round(
           Math.random() * 1e9
         )}.${ext}`;
+        const savePath = path.join(uploadsDir, filename);
         fs.writeFileSync(
           path.join(uploadsDir, filename),
           Buffer.from(data, "base64")
         );
         photoPath = `/uploads/${filename}`;
+        photoPathFs = savePath;
       }
     }
+
+    let predictedClass = null;
+    let predictedRisk = null;
+    const FLASK_URL = process.env.FLASK_URL || "http://localhost:5001/predict";
+
+    if (photoPathFs) {
+      try {
+        const form = new FormData();
+        form.append("photo", fs.createReadStream(photoPathFs));
+
+        const response = await axios.post(FLASK_URL, form, {
+          headers: form.getHeaders(),
+          timeout: 20000,
+        });
+
+        if (response.data && response.data.predicted_class) {
+          predictedClass = response.data.predicted_class;
+          predictedRisk = response.data.risk_score ?? null;
+          console.log("Inference result:", response.data);
+          if (predictedClass.toLowerCase() === "invalid") {
+            return res
+              .status(400)
+              .json({ success: false, message: "Invalid complaint image" });
+          }
+        } else {
+          console.warn("Inference returned unexpected body:", response.data);
+        }
+      } catch (infErr) {
+        console.error("Inference service error:", infErr.message || infErr);
+        // continue - we'll still save the complaint (with fallback risk)
+      }
+    }
+
+    // const c = new Complaint({
+    //   group: group || "group1",
+    //   title: title || "No title",
+    //   description,
+    //   lat: lat ? parseFloat(lat) : undefined,
+    //   lon: lon ? parseFloat(lon) : undefined,
+    //   risk: risk ? parseInt(risk) : 1,
+    //   photo: photoPath,
+    // });
 
     const c = new Complaint({
       group: group || "group1",
@@ -76,7 +124,7 @@ app.post("/api/complaints", upload.single("photo"), async (req, res) => {
       description,
       lat: lat ? parseFloat(lat) : undefined,
       lon: lon ? parseFloat(lon) : undefined,
-      risk: risk ? parseInt(risk) : 1,
+      risk: predictedRisk ?? (risk ? parseInt(risk) : 1),
       photo: photoPath,
     });
 
