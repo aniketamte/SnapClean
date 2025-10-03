@@ -109,6 +109,7 @@ app.post("/api/complaints", upload.single("photo"), async (req, res) => {
       }
     }
 
+    
     // const c = new Complaint({
     //   group: group || "group1",
     //   title: title || "No title",
