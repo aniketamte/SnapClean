@@ -79,7 +79,8 @@ app.post("/api/complaints", upload.single("photo"), async (req, res) => {
     let predictedClass = null;
     let predictedRisk = null;
     const FLASK_URL = process.env.FLASK_URL || "http://localhost:5001/predict";
-
+    console.log("Using Flask URL:", FLASK_URL);
+    
     if (photoPathFs) {
       try {
         const form = new FormData();
