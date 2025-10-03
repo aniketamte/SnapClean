@@ -119,6 +119,12 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# if __name__ == "__main__":
+#     # debug True is fine for local dev; in production use gunicorn
+#     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5001)), debug=True)
+
+
 if __name__ == "__main__":
-    # debug True is fine for local dev; in production use gunicorn
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5001)), debug=True)
+    # Render provides the PORT environment variable
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="0.0.0.0", port=port, debug=True)
