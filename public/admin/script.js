@@ -140,8 +140,8 @@
 // }
 
 // admin/script.js  (replace your old admin script with this)
-const API_BASE = "http://localhost:5000"; // change if deployed
-
+// const API_BASE = "http://localhost:5000"; // change if deployed
+const API_BASE = "https://snapclean-updated.onrender.com";
 let complaints = [];
 let map = null,
   allMarkers = [],

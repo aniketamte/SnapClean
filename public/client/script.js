@@ -1,6 +1,6 @@
 // client/script.js
-const API_URL = "http://localhost:5000"; // Local backend
-
+// const API_URL = "http://localhost:5000"; // Local backend
+const API_BASE = "https://snapclean-updated.onrender.com";
 let video = document.getElementById("video");
 let canvas = document.getElementById("canvas");
 let stream = null;
