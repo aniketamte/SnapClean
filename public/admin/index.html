@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,9 +25,18 @@
     <div class="dashboard">
       <aside class="sidebar">
         <div class="tabs">
-          <button class="tab-btn active" data-tab="group1">List 1</button>
-          <button class="tab-btn" data-tab="group2">List 2</button>
-          <button class="tab-btn" data-tab="group3">List 3</button>
+          <button class="tab-btn active" data-tab="group1">Pending</button>
+          <button class="tab-btn" data-tab="group2">In Progress</button>
+          <button class="tab-btn" data-tab="group3">Completed</button>
+
+          <!-- 🔴 Logout Button Added -->
+          <!-- <button
+            onclick="logoutAdmin()"
+            style="background:#e74c3c;color:white;border:none;
+                   padding:8px 12px;margin-top:10px;
+                   border-radius:8px;cursor:pointer;">
+            Logout
+          </button> -->
         </div>
         <ul class="complaint-list" id="complaint-list">
           <!-- Complaint items injected by JS -->
@@ -57,6 +68,7 @@
         </section>
       </main>
     </div>
+    
     <!-- Leaflet JS CDN -->
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -64,5 +76,19 @@
       crossorigin=""
     ></script>
     <script src="script.js"></script>
+
+    <!-- ✅ Admin Login Check + Logout Script -->
+    <script>
+      // Check if admin is logged in
+      if (localStorage.getItem("isAdminLoggedIn") !== "true") {
+        window.location.href = "login.html";
+      }
+
+      // Add logout function
+      function logoutAdmin() {
+        localStorage.removeItem("isAdminLoggedIn");
+        window.location.href = "login.html";
+      }
+    </script>
   </body>
 </html>

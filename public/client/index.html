@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +13,7 @@
 <body>
   <header>
     <h1>Citizen Complaint Portal</h1>
-    <a href="/server/public/admin/index.html" class="admin-login">Admin Login</a>
+    <a href="/admin/login.html" class="admin-login">Admin Login</a>
   </header>
 
   <main class="container">
@@ -24,25 +26,36 @@
 
     <section class="right-panel">
       <h2>Complaint Form</h2>
+
+      <!-- Camera Capture -->
       <div class="form-group">
         <video id="video" autoplay playsinline></video>
-        <canvas id="canvas" style="display:none;"></canvas>
+        <canvas id="canvas"></canvas>
         <div class="button-group">
-          <button id="start-camera">Capture Image</button>
-          <button id="snap-photo">Snap Photo</button>
+          <button id="start-camera" type="button">Start Camera</button>
+          <button id="snap-photo" type="button">Snap Photo</button>
         </div>
       </div>
 
+      <!-- File Upload -->
+      <div class="form-group">
+        <label for="file-upload">Or upload an image:</label>
+        <input type="file" id="file-upload" accept="image/*" />
+      </div>
+
+      <!-- Location -->
       <div class="form-group">
         <input type="text" id="location" placeholder="Location will appear here..." readonly />
         <br><br>
-        <button id="locate">Locate Me</button>
+        <button id="locate" type="button">Locate Me</button>
       </div>
 
+      <!-- Description -->
       <div class="form-group">
         <input type="text" id="address" placeholder="Add address in description (optional)" />
       </div>
 
+      <!-- Category -->
       <div class="form-group">
         <select id="category">
           <option value="">-- Select Complaint Category --</option>
@@ -52,9 +65,12 @@
         </select>
       </div>
 
+      <!-- Submit -->
       <div class="form-group">
-        <button id="submit-btn">Submit Complaint</button>
+        <button id="submit-btn" type="button">Submit Complaint</button>
       </div>
+
+      <div id="status"></div>
     </section>
   </main>
 
